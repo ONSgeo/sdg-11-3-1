@@ -28,7 +28,7 @@ OS provided analysis for this indicator using data on land-use, derived from the
 ### 4. Analysis ###
 - join/merge 2016 data and 2019 data
 - calculate PGR
-- clculate LCR
+- calculate LCR
 - calculate Ratio LCR/PGR
 
 ### 5. Results/Output ###

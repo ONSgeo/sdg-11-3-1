@@ -9,9 +9,9 @@ The aim of goal 11 is to make human settlements inclusive, safe, resilient and s
 
 ### Data
 
-Population growth rates were calculated using the [ONS mid-year population estimates](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland) for 2013 and 2016.
+Population growth rates were calculated using the [ONS mid-year population estimates](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland) for 2013 and 2016. These annual mid-year figures are available for various administrative and electoral geographies and for different population sub-groups. 
 
-OS provided analysis for this indicator using data on land-use, derived from the [OS Master Map Topography Layer](https://www.ordnancesurvey.co.uk/business-government/products/mastermap-topography). The data distinguishes between natural and man-made features. They used the coverage of surfaces identified as man-made, to compute growth rates of land consumption between 2013 and 2016. The growth rate of man-made land was calculated for every Lower layer Super Output Area (LSOA), for the three countries in Great Britain (England, Scotland and Wales) and for the whole of Great Britain. 
+OS provided initial analysis for this indicator using data on land-use, derived from the [OS Master Map Topography Layer](https://www.ordnancesurvey.co.uk/business-government/products/mastermap-topography). The data distinguishes between natural and man-made features. They used the coverage of surfaces identified as man-made, to compute growth rates of land consumption between 2013 and 2016. The growth rate of man-made land was calculated for every Lower layer Super Output Area (LSOA), for the three countries in Great Britain (England, Scotland and Wales) and for the whole of Great Britain. 
 
 
 ## Methodology

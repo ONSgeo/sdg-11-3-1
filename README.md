@@ -3,88 +3,84 @@
 The Sustainable Development Goals (SDGs) are part of the UN 2030 Agenda for Sustainable Development. The Office for National Statistics (ONS) reports the UK data for the SDG indicators on the [UK SDG data website](https://sdgdata.gov.uk/).
 
 
-The aim of goal 11 is to make human settlements inclusive, safe, resilient and sustainable. Target 11.3 focuses on enhancing inclusive and sustainable growth of cities and the sustainable planning of human settlements in all countries by 2030. Indicator 11.3.1 measures sustainable growth of urban areas and populations.
+Included in the 17 SDGs is Goal 15, which aims to ‘Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss’. One of the goal 15 indicators that, until recently, remained unreported for the UK, is **15.1.1: ‘Forest area as a proportion of total land area’**. 
 
-### Indicator 11.3.1: **Ratio of land consumption rate to population growth rate**
+This code aims to provide a means to report on the status of SDG 15.1.1 in the UK from available open data. It is hoped that the base class included will also provide a starting point to analyse additional SDGs.  
+
+### Definitions	
+
+According to the Food and Agriculture Organization of the United Nations (FAO), Forest is defined as: “land spanning more than 0.5 hectares with trees higher than 5 meters and a canopy cover of more than 10 percent, or trees able to reach these thresholds in situ. It does not include land that is predominantly under agricultural or urban land use”. In the United Kingdom, forest is defined as below:
+
+**Forest/woodland** all forest and woodland area over 0.5 hectare with a minimum of 20% canopy cover (25% in Northern Ireland) (or the potential to achieve it) and a minimum width of 20 metres, including areas of new planting, clearfell, windblow and restocked areas. This differs from the UN definition for which the minimum canopy cover is 10% (or the potential to achieve it)
+
+**Land area**  is the country area excluding area under inland waters and coastal waters. For this analysis, total land area is calculated using Standard Area Measurements (**SAM**) available on the [ONS Open Geography portal](https://geoportal.statistics.gov.uk/search?collection=Dataset&sort=name&tags=all(PRD_SAM)). All measurements provided are ‘flat’ as they do not take into account variations in relief e.g. mountains and valleys. Measurements are given in hectares (10,000 square metres) to 2 decimal places. Four types of measurements are included: total extent (AREAEHECT), area to mean high water (coastline) (AREACHECT), area of inland water (AREAIHECT) and area to mean high water excluding area of inland water (land area) (AREALHECT) which is the type used for this analysis.
+
+### Useage
+
+1. Clone this repository into the directory you'd like to work from. 
+
+2. In the command-line interface, navigate to the root folder of the project and enter:
+     
+    pip install .
+    
+3. Create a .env file to set the user parameters. To do this, open Notepad and write ROOT_DIR= and the directory you'd like to work from,  eg: 
+    
+    ROOT_DIR=C:\Users\username\scripts\sdg15_1_1     
+
+Save this notepad as a .env file (by simply saving as .env) in the main directory you'd like to work from.
+
+4. Userparams class assumes that input data will be located in the main directory within a folder named sdg_name_data, eg:
+
+    C:\Users\username\scripts\SDGs\sdg_15_1_1_data
+    
+This, the directory to which outputs are saved, and the years to be analysed can be customised within user_params. 
+
+5. SDG15_1_1_Calculate and SDG15_1_1_Analysis can now be used!
+      
 
 ### Data
 
-Population growth rates were calculated using the [ONS mid-year population estimates](https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland) for 2013 and 2016. These annual mid-year figures are available for various administrative and electoral geographies and for different population sub-groups. 
+       Forest/Woodland data - Forestry Commission Open Data (GB) and DAERA (NI).  
+       Land area - Local authority districts (LADs) boundaries from ONS Open Geography portal.
+       SAM for LADs from ONS Open Geography portal.
 
-OS provided initial analysis for this indicator using data on land-use, derived from the [OS Master Map Topography Layer](https://www.ordnancesurvey.co.uk/business-government/products/mastermap-topography). The data distinguishes between natural and man-made features. They used the coverage of surfaces identified as man-made, to compute growth rates of land consumption between 2013 and 2016. The growth rate of man-made land was calculated for every Lower layer Super Output Area (LSOA), for the three countries in Great Britain (England, Scotland and Wales) and for the whole of Great Britain. 
+### Methodology
 
+    SDGBase was designed to present a resusable base class applicable to the analysis of multiple SDGs.   
 
-## Methodology
+    SDG15_1_1 is a child class of SDGBase and performs functions relevant to the analysis of SDG15_1_1. It is potentially applicable to the
+    analysis of further SDGs with input data of a similar structure. 
+    
+    UserParams class offers customisation to the user; directories from which to input data, save output data and select
+    the years for which the SDG is to be calculated. 
+    
+    Once UserParams are specified, SDG15_1_1_Calculate.ipynb allows the user to calculate SDG15_1_1 across multiple years and 
+    outputs results as both a data frame and a choropleth map.   
+    
+    SDG15_1_1_Analysis.ipynb offers the user further insight into the data, allowing SDG metrics to be explored by individual land               divisions across time. 
+       
+### Calculation
+    
+    Forest area as a proportion of total land area (PFATLA) = Forest area (reference year)/Land area (reference year)*100 
 
-### 1. Data preparation ###
-- population data from LSOA mid-year estimates (ONS) and 
-- land area data from OS
+### Analysis
 
-### 2. Investigate data ###
-- LAD boundary changes between 2016 and 2019
+    SDGBase presents an abstract base class enabling the defintion of input and output directories for data analysis, use of relevant
+    read methods based on the file extension of inputs, and the joining of dataframes; applicable to 
+    analysis of additional SDGs.  
+    
+    SDG15_1_1 is a child class of SDGBase and allows for the automatic pairing of data input files published in the same year, 
+    analysis across multiple years, calculation of SDG15_1_1 and plotting and saving of results.     
+    
+    SDG15_1_1_Calculate.ipynb allows the user to calculate SDG15_1_1 from the file directories specified in UserParams class and produces
+    and saves outputs (forest area as a proportion of total land area for each specified land division) for each available year as both a       .csv file and as a choropleth map (.jpeg).
+    
+    SDG15_1_1_Analysis.ipynb allows plotting of a time series of forest area as a proportion of total land area for each land division         across available years.   
+              
+### Outputs
 
-### 3. Load data into python ###
-
-### 4. Analysis ###
-- join/merge 2016 data and 2019 data
-- calculate PGR
-- calculate LCR
-- calculate Ratio LCR/PGR
-
-### 5. Results/Output ###
-- csv
-- N/A LADs
-
-### Calculations	
-
-**Ratio of land consumption rate to population growth rate** = Land consumption rate / Population growth rate
-
-
-
-**Population growth rate** = Natural logarithm ( Measurement year population / Previous population ) / Time between the measurement periods
-
-**Land consumption rate** = Natural logarithm ( Measurement year manmade land area / Previous manmade land area ) / Time between the measurement periods
-
-** Rates were calculated using the formula in the [UN metadata](https://unstats.un.org/sdgs/metadata/?Text=&Goal=11&Target=11.3). 
-
-## Results
-
-In Great Britain, land consumption grew faster than the population growth rate between 2013 and 2016. Land consumption grew by 4.3% and the population by 1.5%. Only in Wales did the population grow faster than the land consumption rate. Between 2013 and 2016, the population in Wales grew by 1.9% and the land consumption rate by 1.4%. Land consumption rate versus the population growth rate was the highest in Scotland, where the population grew by 1.4% and land consumption by 6.1%. In England, land consumption also grew faster than the population, with land consumption growing by 4.4% and the population by 2.3%. Scotland had the smallest population growth and the highest growth in land consumption, contributing to the high ratio.
-
-## Output
-
-
-Indicator: [Indicator 11.3.1
-Ratio of land consumption rate to population growth rate](https://sdgdata.gov.uk/11-3-1/)
-
-Dataset: [Ratio of land consumption growth rate to population growth rate by country and Lower layer Super Output Area](https://www.ons.gov.uk/economy/environmentalaccounts/datasets/ratiooflandconsumptiongrowthratetopopulationgrowthratebycountryandlowerlayersuperoutputarea)
-
-
-Publication: [Using innovative methods to report against the Sustainable Development Goals](https://www.ons.gov.uk/economy/environmentalaccounts/articles/usinginnovativemethodstoreportagainstthesustainabledevelopmentgoals/2018-10-22)
-
-### Limitations
-
-Data were only produced for Great Britain, as the OS Land Use Layer is not available for Northern Ireland.
-
-Data could not be calculated for all the LSOAs in Great Britain due to the population growth rates. In areas where population neither grew or declined, the formula could not be applied.
-
-There is on-going research within ONS Geography to provide a more scalable solution to the monitoring of land consumption rates, as OS data are only available for Great Britain. The aim is to use satellite imagery to examine the amount of built-up land, in the whole of the UK. We are currently still working to select the right methodologies and processes.
-
-### Contacts
-
-
-Emma Wood (SDG Team: ONS) 
-
-Robert Shava (Geospatial Team: ONS) 
-
-Heather Porter (Geospatial Team: ONS) 
-
-
-
-
-
-
-
-
-
-
+    SDG15_1_1_Calculate.ipynb produces outputs for each specified year as a .csv file (forest area as a proportion of total land area for       each specified land division) and a.jpeg (choropleth map of forest area as a proportion of total land area). 
+    
+    SDG15-1_1_Analysis.ipynb allows plotting of a time series of forest area as a proportion of total land area for each land division         across available years.   
+       
+       

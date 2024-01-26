@@ -73,80 +73,115 @@ class SDG11_3_1(SDGBase):
         return lcr / pgr
 
 
+    def filter_land_on_col(self, df: pd.DataFrame, flag: bool, col: str, val: str) -> pd.DataFrame:
+        if flag:
+            return df[df[col] == val]
+        return df
+
+
+    def built_up_area_per_capita(self, bua, population):
+        return bua / population
+
+
     def calculate_sdg(
             self, 
             input_files: Dict[str, InputFile],
-            merge_col: str,
-            pop_cols: List[str],
-            land_cols: List[str],
-            years: int,
-            years_merge_suffixes: Tuple[str, str],
-            data_suffix: str
+            save_csv: bool
         ) -> bool:
-        self.data_suffix: str = data_suffix
 
-        pop_old = self.load_data(
-            input_files["pop_old"].file_path, 
-            kwargs=input_files["pop_old"].kwargs, 
-            index=input_files["pop_old"].index_col
-        )
-        pop_new = self.load_data(
-            input_files["pop_new"].file_path, 
-            kwargs=input_files["pop_new"].kwargs, 
-            index=input_files["pop_new"].index_col
-        )
-
-        pop_merge = self.merge_population_calc_pgr(pop_old, pop_new, merge_col, pop_cols, years_merge_suffixes, years)
+        t1_t2_years = abs(input_files["pop_t2"].year - input_files["pop_t1"].year)
+        t2_t3_years = abs(input_files["pop_t3"].year - input_files["pop_t2"].year)
 
 
-        land_area_old = self.load_data(
-            input_files["land_area_old"].file_path, 
-            kwargs=input_files["land_area_old"].kwargs, 
-            index=input_files["land_area_old"].index_col
-        )
-        land_area_new = self.load_data(
-            input_files["land_area_new"].file_path, 
-            kwargs=input_files["land_area_new"].kwargs, 
-            index=input_files["land_area_new"].index_col
-        )
+        # Population calculations
+        pop_t1 = self.load_data(input_files["pop_t1"].file_path, kwargs=input_files["pop_t1"].kwargs).sort_index()
+        pop_t2 = self.load_data(input_files["pop_t2"].file_path, kwargs=input_files["pop_t2"].kwargs).sort_index()
+        pop_t3 = self.load_data(input_files["pop_t3"].file_path, kwargs=input_files["pop_t3"].kwargs).sort_index()
 
-        filt_old_cond = (land_area_old["ctry"] == "E") | (land_area_old["ctry"] == "W") # filter to separate EW data
-        land_area_old_filtered= land_area_old.loc[filt_old_cond].copy()
+        pop_t1 = pop_t1.rename(columns={input_files["pop_t1"].pop_col_init: input_files["pop_t1"].pop_col_rename})
+        pop_t2 = pop_t2.rename(columns={input_files["pop_t2"].pop_col_init: input_files["pop_t2"].pop_col_rename})
+        pop_t3 = pop_t3.rename(columns={input_files["pop_t3"].pop_col_init: input_files["pop_t3"].pop_col_rename})
 
-        filt_new_cond = (land_area_new["landcover_type"]=="Manmade") # filter "manmade" landcover for EW
-        land_area_new_filtered = land_area_new.loc[filt_new_cond]
+        pop_counts = [pop_t1[input_files["pop_t1"].pop_col_rename], pop_t2[input_files["pop_t2"].pop_col_rename], pop_t3[input_files["pop_t3"].pop_col_rename]]
+        comb_pop = pd.concat(pop_counts, axis=1).dropna()
 
-        land_area19_16ewmm = self.merge_land_consumption_calc_lcr(land_area_old_filtered, land_area_new_filtered, merge_col, land_cols, years_merge_suffixes, years)
+        t1_t2_pgr = self.population_growth_rate(
+            comb_pop[input_files["pop_t1"].pop_col_rename], 
+            comb_pop[input_files["pop_t2"].pop_col_rename], 
+            t1_t2_years
+        ).rename("t1_t2_pgr")
+
+        t2_t3_pgr = self.population_growth_rate(
+            comb_pop[input_files["pop_t2"].pop_col_rename], 
+            comb_pop[input_files["pop_t3"].pop_col_rename], 
+            t2_t3_years
+        ).rename("t2_t3_pgr")
+
+        pgrs = pd.concat([t1_t2_pgr,t2_t3_pgr], axis=1)
+
+        pop_calcs = pd.concat([comb_pop, pgrs], axis=1)
 
 
-        lcrpop_merge = self.merge_lcr_pgr(pop_merge, land_area19_16ewmm, merge_col, [f"lcr_{self.data_suffix}", f"pgr_{self.data_suffix}"], ("_pgr", "_lcr"))
+        # Land coverage calculations
+        land_t1 = self.load_data(input_files["land_t1"].file_path, kwargs=input_files["land_t1"].kwargs)
+        land_t2 = self.load_data(input_files["land_t2"].file_path, kwargs=input_files["land_t2"].kwargs)
+        land_t3 = self.load_data(input_files["land_t3"].file_path, kwargs=input_files["land_t3"].kwargs)
 
-        final_df = pd.concat([pop_merge, land_area19_16ewmm, lcrpop_merge], axis=1)
-        
-        return final_df.loc[:,~final_df.columns.duplicated()]
+        land_t1 = self.filter_land_on_col(
+            land_t1,
+            input_files["land_t1"].filter_land_flag, 
+            input_files["land_t1"].filter_land_col, 
+            input_files["land_t1"].filter_land_value
+        )[[input_files["land_t1"].land_col]]
 
+        land_t2 = self.filter_land_on_col(
+            land_t2,
+            input_files["land_t2"].filter_land_flag, 
+            input_files["land_t2"].filter_land_col, 
+            input_files["land_t2"].filter_land_value
+        )[[input_files["land_t2"].land_col]]
+
+        land_t3 = self.filter_land_on_col(
+            land_t3,
+            input_files["land_t3"].filter_land_flag, 
+            input_files["land_t3"].filter_land_col, 
+            input_files["land_t3"].filter_land_value
+        )[[input_files["land_t3"].land_col]]
+
+        comb_land = pd.concat([land_t1, land_t2, land_t3], axis=1).dropna()
+
+        t1_t2_lcr = self.land_consumption_rate(comb_land[input_files["land_t1"].land_col], comb_land[input_files["land_t2"].land_col], t1_t2_years).rename("t1_t2_lcr")
+        t2_t3_lcr = self.land_consumption_rate(comb_land[input_files["land_t2"].land_col], comb_land[input_files["land_t3"].land_col], t2_t3_years).rename("t2_t3_lcr")
+
+        lcrs = pd.concat([t1_t2_lcr, t2_t3_lcr], axis=1)
+
+        land_calcs = pd.concat([comb_land, lcrs], axis=1)
+
+
+        # combining for final calculations
+        comb_derived_values = pd.concat([pgrs, lcrs], axis=1)
+
+        lcr_pgr_ratio_t1_t2 = self.land_consumption_rate_population_growth_rate_ratio(comb_derived_values["t1_t2_lcr"], comb_derived_values["t1_t2_pgr"]).rename("lcr_pgr_ratio_t1_t2")
+        lcr_pgr_ratio_t2_t3 = self.land_consumption_rate_population_growth_rate_ratio(comb_derived_values["t2_t3_lcr"], comb_derived_values["t2_t3_pgr"]).rename("lcr_pgr_ratio_t2_t3")
+
+        final_values = pd.concat([lcr_pgr_ratio_t1_t2, lcr_pgr_ratio_t2_t3], axis=1)
+
+        full_report = pd.concat([pop_t3["lsoa name"], pop_calcs, land_calcs, final_values], axis=1)
+        full_report["bua_per_capita_t1"] = self.built_up_area_per_capita(full_report[input_files["land_t1"].land_col], full_report[input_files["pop_t1"].pop_col_rename])
+        full_report["bua_per_capita_t2"] = self.built_up_area_per_capita(full_report[input_files["land_t2"].land_col], full_report[input_files["pop_t2"].pop_col_rename])
+        full_report["bua_per_capita_t3"] = self.built_up_area_per_capita(full_report[input_files["land_t3"].land_col], full_report[input_files["pop_t3"].pop_col_rename])
+
+        if save_csv:
+            self.save_data(full_report, "sdg11_3_1")
+
+        return True
 
 
 def run_sdg11_3_1(params: UserParams) -> None:
     
     gfr: SDG11_3_1 = SDG11_3_1("", params.root_dir, params.data_dir, params.output_dir)
 
-    if params.single_year_test and all([params.raster_file_path, params.ruc_file_path, params.lad_file_path, params.roads_file_path, params.year_start]):
-        print(f"Running single year export for year: {params.year_start}")
-        gfr.calculate_sdg(
-            ""
-            # raster_file_path = params.raster_file_path,
-            # ruc_file_path = params.ruc_file_path,
-            # lad_file_path = params.lad_file_path,
-            # roads_file_path = params.roads_file_path,
-            # rural_class_col = params.rural_class_col,
-            # road_class_col = params.road_class_col,
-            # road_classif_list = params.road_classif_list,
-            # dissolve_col = params.dissolve_col,
-            # year = params.year_start,
-            # save_shp_file=params.save_csv_file,
-        )
-
-    else:
-        print("Execution failed, please check necessary params:\n")
-        params.print_params()
+    gfr.calculate_sdg(
+        params.input_files,
+        params.save_csv_file
+    )

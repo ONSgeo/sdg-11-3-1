@@ -174,8 +174,25 @@ class SDG11_3_1(SDGBase):
         full_report["bua_per_capita_t2"] = self.built_up_area_per_capita(full_report[input_files["land_t2"].land_col], full_report[input_files["pop_t2"].pop_col_rename])
         full_report["bua_per_capita_t3"] = self.built_up_area_per_capita(full_report[input_files["land_t3"].land_col], full_report[input_files["pop_t3"].pop_col_rename])
 
+
+        raw_values = pd.concat([comb_pop, comb_land], axis=1)
+        raw_values["ctry_code"] = [s[0] for s in raw_values.index]
+        grouped_ctry = raw_values.groupby("ctry_code").sum()
+        grouped_ctry["t1_t2_lcr"] = self.land_consumption_rate(grouped_ctry[input_files["land_t1"].land_col], grouped_ctry[input_files["land_t2"].land_col], t1_t2_years)
+        grouped_ctry["t2_t3_lcr"] = self.land_consumption_rate(grouped_ctry[input_files["land_t2"].land_col], grouped_ctry[input_files["land_t3"].land_col], t2_t3_years)
+        grouped_ctry["t1_t2_pgr"] = self.population_growth_rate(grouped_ctry[input_files["pop_t1"].pop_col_rename], grouped_ctry[input_files["pop_t2"].pop_col_rename], t1_t2_years)
+        grouped_ctry["t2_t3_pgr"] = self.population_growth_rate(grouped_ctry[input_files["pop_t2"].pop_col_rename], grouped_ctry[input_files["pop_t3"].pop_col_rename], t2_t3_years)
+
+        grouped_ctry["lcr_pgr_ratio_t1_t2"] = self.land_consumption_rate_population_growth_rate_ratio(grouped_ctry["t1_t2_lcr"], grouped_ctry["t1_t2_pgr"])
+        grouped_ctry["lcr_pgr_ratio_t2_t3"] = self.land_consumption_rate_population_growth_rate_ratio(grouped_ctry["t2_t3_lcr"], grouped_ctry["t2_t3_pgr"])
+
+        grouped_ctry["bua_per_capita_t1"] = self.built_up_area_per_capita(grouped_ctry[input_files["land_t1"].land_col], grouped_ctry[input_files["pop_t1"].pop_col_rename])
+        grouped_ctry["bua_per_capita_t2"] = self.built_up_area_per_capita(grouped_ctry[input_files["land_t2"].land_col], grouped_ctry[input_files["pop_t2"].pop_col_rename])
+        grouped_ctry["bua_per_capita_t3"] = self.built_up_area_per_capita(grouped_ctry[input_files["land_t3"].land_col], grouped_ctry[input_files["pop_t3"].pop_col_rename])
+
         if save_csv:
-            self.save_data(full_report, "sdg11_3_1")
+            self.save_data(full_report, "sdg11_3_1_by_lsoa")
+            self.save_data(grouped_ctry, "sdg11_3_1_by_ctry")
 
         return True
 

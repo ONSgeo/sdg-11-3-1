@@ -8,6 +8,9 @@ from src.sdg_11_3_1_src.sdg_base.src.sdg_base_src.sdg_base import SDGBase
 from src.sdg_11_3_1_src.utils import InputFile
 from user_params import UserParams
 
+import warnings
+warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
+
 class SDG11_3_1(SDGBase):
     """Defines input and output directories for data.
     
@@ -79,7 +82,7 @@ class SDG11_3_1(SDGBase):
         return df
 
 
-    def built_up_area_per_capita(self, bua, population):
+    def built_up_area_per_capita(self, bua: pd.Series, population: pd.Series) -> pd.Series:
         return bua / population
 
 

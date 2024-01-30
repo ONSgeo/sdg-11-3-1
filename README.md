@@ -6,28 +6,36 @@ Included in the 17 SDGs is Goal 11, which aims to ["Make cities and human settle
 
 This code aims to provide an automated calculation of SDG indicator 11.3.1 for the timely reporting on progress towards Goal 11. The most recent reporting of this indicator by the UK covers the years [2013-2016](https://sdgdata.gov.uk/11-3-1/).
 
-## Usage
-
+## Set-up 
+?
 1. Clone this repository into the directory you'd like to work from. 
-
-2. In the command-line interface, navigate to the root folder of the project and enter:
-     
-    pip install .
     
-3. Create a .env file to set the user parameters. To do this, open Notepad and write ROOT_DIR= and the directory you'd like to work from,  eg: 
-    
-    ROOT_DIR=C:\Users\username\scripts\sdg15_1_1     
+2. Create a .env file to set the directory from which inputs will be imported and results will be exported:
 
-Save this notepad as a .env file (by simply saving as .env) in the main directory you'd like to work from.
+   Open the Notepad app and write ROOT_DIR= followed by the directory in which the input data is stored (and results we be exported to),  eg: 
+    
+    ROOT_DIR=C:\Users\username\scripts\sdg11_3_1     
+
+Save this notepad as a .env file within the cloned repository.
 
 4. Userparams class assumes that input data will be located in the main directory within a folder named sdg_name_data, eg:
 
-    C:\Users\username\scripts\SDGs\sdg_15_1_1_data
-    
-This, the directory to which outputs are saved, and the years to be analysed can be customised within user_params. 
+## Usage 
+?
 
-5. SDG15_1_1_Calculate and SDG15_1_1_Analysis can now be used!
-      
+## Input Data
+
+This SDG indicator requires 3 distinct data types to be input: 
+
+1. **Population estimates for a given time periods.** These should be to the smallest possible granularity (LSOAs have been used previously). The likely format for this data is .csv.
+
+2. **Cover of land by manmade, urban, or built up structures for given time periods.** The likely format of this data is .shp. 
+
+3. **The geographical boundaries of the areas for which population estimates used were collected.** This is so that land consumption can be accuratley compared against population growth. The likely format of this data is .shp.
+
+Since this SDG indicator considers **rates**, the time at which the input data has been collected is important. Population estimates and land cover data to be compared should be collected **within the same year**, and preferably the same month. Geographical boundaries must be uniform used to should correspond to the **most recent year** for which population has been sampled.  
+
+Since the United Kingdom is made up of four countries, each with their own 
 
 ### Definitions	
 

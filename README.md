@@ -63,45 +63,12 @@ Northern Ireland (statistical geography boundaries): Small Areas, Northern Irela
 
 Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURRENTLY AVAILABLE: will need discussion with OSNI as may not be free as under the GB PSGA agreement.  
 
-### Methodology
+## Methodology
 
-    SDGBase was designed to present a resusable base class applicable to the analysis of multiple SDGs.   
 
-    SDG15_1_1 is a child class of SDGBase and performs functions relevant to the analysis of SDG15_1_1. It is potentially applicable to the
-    analysis of further SDGs with input data of a similar structure. 
-    
-    UserParams class offers customisation to the user; directories from which to input data, save output data and select
-    the years for which the SDG is to be calculated. 
-    
-    Once UserParams are specified, SDG15_1_1_Calculate.ipynb allows the user to calculate SDG15_1_1 across multiple years and 
-    outputs results as both a data frame and a choropleth map.   
-    
-    SDG15_1_1_Analysis.ipynb offers the user further insight into the data, allowing SDG metrics to be explored by individual land               divisions across time. 
        
-### Calculation
-    
-    Forest area as a proportion of total land area (PFATLA) = Forest area (reference year)/Land area (reference year)*100 
 
-### Analysis
-
-    SDGBase presents an abstract base class enabling the defintion of input and output directories for data analysis, use of relevant
-    read methods based on the file extension of inputs, and the joining of dataframes; applicable to 
-    analysis of additional SDGs.  
-    
-    SDG15_1_1 is a child class of SDGBase and allows for the automatic pairing of data input files published in the same year, 
-    analysis across multiple years, calculation of SDG15_1_1 and plotting and saving of results.     
-    
-    SDG15_1_1_Calculate.ipynb allows the user to calculate SDG15_1_1 from the file directories specified in UserParams class and produces
-    and saves outputs (forest area as a proportion of total land area for each specified land division) for each available year as both a       .csv file and as a choropleth map (.jpeg).
-    
-    SDG15_1_1_Analysis.ipynb allows plotting of a time series of forest area as a proportion of total land area for each land division         across available years.   
-              
-### Outputs
+## Outputs
 
 
-
-    SDG15_1_1_Calculate.ipynb produces outputs for each specified year as a .csv file (forest area as a proportion of total land area for       each specified land division) and a.jpeg (choropleth map of forest area as a proportion of total land area). 
-    
-    SDG15-1_1_Analysis.ipynb allows plotting of a time series of forest area as a proportion of total land area for each land division         across available years.   
-       
-       
+### Considerations

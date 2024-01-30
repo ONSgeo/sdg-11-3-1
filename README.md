@@ -41,27 +41,27 @@ Since the United Kingdom is made up of four countries, each with their own metho
 
 # Previously used data sources
     
-    Great Britain (land consumption): Ordnance Survey Master Map Topography, manmade layer. 
+Great Britain (land consumption): Ordnance Survey Master Map Topography, manmade layer. 
 (https://www.ordnancesurvey.co.uk/products/os-mastermap-topography-layer)
     
-    England and Wales (population):Lower-Layer Super Output Area (LSOA) Population estimates, ONS.             (https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/lowersuperoutputareamidyearpopulationestimates)
+England and Wales (population):Lower-Layer Super Output Area (LSOA) Population estimates, ONS.             (https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/lowersuperoutputareamidyearpopulationestimates)
         
-    England and Wales (statistical geography boundaries): LSOAs, ONS Open Geography Portal. 
+England and Wales (statistical geography boundaries): LSOAs, ONS Open Geography Portal. 
 (https://geoportal.statistics.gov.uk/datasets/3011969ff4e84966b2cbc3b642ae32de_0/explore?location=50.170958%2C-5.597654%2C5.68)
     
-    Scotland (population): Small Area Population Estimates (SAPE), Data Zone based, National Records of Scotland. 
+Scotland (population): Small Area Population Estimates (SAPE), Data Zone based, National Records of Scotland. 
 (https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/small-area-population-estimates-2011-data-zone-based/time-series)
     
-    Scotland (statistical geography boundaries): Data Zones, SpatialData.gov.scot.
+Scotland (statistical geography boundaries): Data Zones, SpatialData.gov.scot.
 (https://spatialdata.gov.scot/geonetwork/srv/eng/catalog.search#/metadata/7d3e8709-98fa-4d71-867c-d5c8293823f2)
 
-    Northern Ireland (population): Small Area population estimates, Northern Ireland Statistics and Research Agency.
+Northern Ireland (population): Small Area population estimates, Northern Ireland Statistics and Research Agency.
 (https://www.nisra.gov.uk/publications/2019-mid-year-population-estimates-small-areas)
 
-    Northern Ireland (statistical geography boundaries): Small Areas, Northern Ireland Statistics and Research Agency.
+Northern Ireland (statistical geography boundaries): Small Areas, Northern Ireland Statistics and Research Agency.
 (https://www.nisra.gov.uk/support/output-geography-census-2011/small-areas)
 
-    Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURRENTLY AVAILABLE: will need discussion with OSNI as may not be free as under the GB PSGA agreement.  
+Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURRENTLY AVAILABLE: will need discussion with OSNI as may not be free as under the GB PSGA agreement.  
 
 ### Methodology
 

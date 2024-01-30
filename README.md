@@ -1,11 +1,10 @@
 ## Introduction
 
-The Sustainable Development Goals (SDGs) are part of the UN 2030 Agenda for Sustainable Development. The Office for National Statistics (ONS) reports the UK data for the SDG indicators on the [UK SDG data website](https://sdgdata.gov.uk/).
+The Sustainable Development Goals (SDGs) are part of the UN 2030 Agenda for Sustainable Development. The Office for National Statistics (ONS) reports the UK data for the SDG indicators on the [UK SDG data website](https://sdgdata.gov.uk/), contributing to progress towards a sustainable global future. 
 
+Included in the 17 SDGs is Goal 11, which aims to ["Make cities and human settlements inclusive, safe, resillient and sustainable"](https://sdgs.un.org/goals/goal11). One indicator that supports this goal is **11.3.1: Ratio of land consumption rate to population growth rate**. 
 
-Included in the 17 SDGs is Goal 15, which aims to ‘Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss’. One of the goal 15 indicators that, until recently, remained unreported for the UK, is **15.1.1: ‘Forest area as a proportion of total land area’**. 
-
-This code aims to provide a means to report on the status of SDG 15.1.1 in the UK from available open data. It is hoped that the base class included will also provide a starting point to analyse additional SDGs.  
+This code aims to provide an automated calculation of SDG indicator 11.3.1 for the timely reporting on progress towards Goal 11. The most recent reporting of this indicator by the UK covers the years [2013-2016](https://sdgdata.gov.uk/11-3-1/).
 
 ### Definitions	
 
@@ -78,6 +77,8 @@ This, the directory to which outputs are saved, and the years to be analysed can
     SDG15_1_1_Analysis.ipynb allows plotting of a time series of forest area as a proportion of total land area for each land division         across available years.   
               
 ### Outputs
+
+
 
     SDG15_1_1_Calculate.ipynb produces outputs for each specified year as a .csv file (forest area as a proportion of total land area for       each specified land division) and a.jpeg (choropleth map of forest area as a proportion of total land area). 
     

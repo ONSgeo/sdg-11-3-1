@@ -33,7 +33,7 @@ This SDG indicator requires 3 distinct data types to be input:
 
 3. **The geographical boundaries of the areas for which population estimates used were collected.** This is so that land consumption can be accuratley compared against population growth. The likely format of this data is .shp.
 
-Since this SDG indicator considers **rates**, the time at which the input data has been collected is important. Population estimates and land cover data to be compared should be collected **within the same year**, and preferably the same month. Geographical boundaries must be uniform used to should correspond to the **most recent year** for which population has been sampled.  
+Since this SDG indicator considers **rates**, the time at which the input data has been collected is important. Population estimates and land cover data to be compared should be collected **within the same year**, and preferably the same month. A wider temporal range between samples (5-10 years is recommended) will caputure more change than using consectutive years. Geographical boundaries must be uniform used to should correspond to the **most recent year** for which population has been sampled.  
 
 Since the United Kingdom is made up of four countries, each with their own methods of collecting and publishing data, total input data will likely amount to more than 3 sources. 
 
@@ -72,3 +72,4 @@ Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURR
 
 
 ### Considerations
+

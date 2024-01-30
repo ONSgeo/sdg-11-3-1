@@ -35,23 +35,33 @@ This SDG indicator requires 3 distinct data types to be input:
 
 Since this SDG indicator considers **rates**, the time at which the input data has been collected is important. Population estimates and land cover data to be compared should be collected **within the same year**, and preferably the same month. Geographical boundaries must be uniform used to should correspond to the **most recent year** for which population has been sampled.  
 
-Since the United Kingdom is made up of four countries, each with their own 
+Since the United Kingdom is made up of four countries, each with their own methods of collecting and publishing data, total input data will likely amount to more than 3 sources. 
 
-### Definitions	
+[Further detail on requirements for SGG 11.3.1 as specified by the UN.](https://unstats.un.org/sdgs/metadata/files/Metadata-11-03-01.pdf) 
 
-According to the Food and Agriculture Organization of the United Nations (FAO), Forest is defined as: “land spanning more than 0.5 hectares with trees higher than 5 meters and a canopy cover of more than 10 percent, or trees able to reach these thresholds in situ. It does not include land that is predominantly under agricultural or urban land use”. In the United Kingdom, forest is defined as below:
+# Previously used data sources
+    
+    Great Britain (land consumption): Ordnance Survey Master Map Topography, manmade layer. 
+(https://www.ordnancesurvey.co.uk/products/os-mastermap-topography-layer)
+    
+    England and Wales (population):Lower-Layer Super Output Area (LSOA) Population estimates, ONS.             (https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/lowersuperoutputareamidyearpopulationestimates)
+        
+    England and Wales (statistical geography boundaries): LSOAs, ONS Open Geography Portal. 
+(https://geoportal.statistics.gov.uk/datasets/3011969ff4e84966b2cbc3b642ae32de_0/explore?location=50.170958%2C-5.597654%2C5.68)
+    
+    Scotland (population): Small Area Population Estimates (SAPE), Data Zone based, National Records of Scotland. 
+(https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/small-area-population-estimates-2011-data-zone-based/time-series)
+    
+    Scotland (statistical geography boundaries): Data Zones, SpatialData.gov.scot.
+(https://spatialdata.gov.scot/geonetwork/srv/eng/catalog.search#/metadata/7d3e8709-98fa-4d71-867c-d5c8293823f2)
 
-**Forest/woodland** all forest and woodland area over 0.5 hectare with a minimum of 20% canopy cover (25% in Northern Ireland) (or the potential to achieve it) and a minimum width of 20 metres, including areas of new planting, clearfell, windblow and restocked areas. This differs from the UN definition for which the minimum canopy cover is 10% (or the potential to achieve it)
+    Northern Ireland (population): Small Area population estimates, Northern Ireland Statistics and Research Agency.
+(https://www.nisra.gov.uk/publications/2019-mid-year-population-estimates-small-areas)
 
-**Land area**  is the country area excluding area under inland waters and coastal waters. For this analysis, total land area is calculated using Standard Area Measurements (**SAM**) available on the [ONS Open Geography portal](https://geoportal.statistics.gov.uk/search?collection=Dataset&sort=name&tags=all(PRD_SAM)). All measurements provided are ‘flat’ as they do not take into account variations in relief e.g. mountains and valleys. Measurements are given in hectares (10,000 square metres) to 2 decimal places. Four types of measurements are included: total extent (AREAEHECT), area to mean high water (coastline) (AREACHECT), area of inland water (AREAIHECT) and area to mean high water excluding area of inland water (land area) (AREALHECT) which is the type used for this analysis.
+    Northern Ireland (statistical geography boundaries): Small Areas, Northern Ireland Statistics and Research Agency.
+(https://www.nisra.gov.uk/support/output-geography-census-2011/small-areas)
 
-
-
-### Data
-
-       Forest/Woodland data - Forestry Commission Open Data (GB) and DAERA (NI).  
-       Land area - Local authority districts (LADs) boundaries from ONS Open Geography portal.
-       SAM for LADs from ONS Open Geography portal.
+    Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURRENTLY AVAILABLE: will need discussion with OSNI as may not be free as under the GB PSGA agreement.  
 
 ### Methodology
 

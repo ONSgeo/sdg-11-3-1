@@ -18,7 +18,7 @@ This code aims to provide an automated calculation of SDG indicator 11.3.1 for t
 
 Save this notepad as a .env file within the cloned repository.
 
-4. Userparams class assumes that input data will be located in the main directory within a folder named sdg_name_data, eg:
+4. Userparams class 
 
 ## Usage 
 ?

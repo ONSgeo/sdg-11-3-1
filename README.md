@@ -105,11 +105,27 @@ Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURR
 
 ## Methodology
 
+1. popualtion data read in. renames them to all ages and then the year. These means the tyear references are kept when joined to a larger data frame. other unnecessary columns are dropped and the geography is set as the index to allow for concatanations that join byu the index and the geogrpahies are merged. 
 
+2. popualtion growth rate is calcualted for each geogrpahy between the first time period, and the dame ofr the second time period. The results are then concatenated into a new data frame of the growth raes.
+
+3. Dataframes are come in. if they need to be filtered this can be specified. If you don't need to filter, ir=e you have all manamde areas alreayd selected in the dataframe, there is no need ot filter. for each of the years. The filtered fro=ames are combined into one land, joined on the indexes (geogrpahy). This allows for columnwise calculation of land consumption rate.
+
+4. The land consumption rates are calcualted columnwise, and concatenated into their own series. these are concatenated. They need to be the same type to be concatenated. The combined land and land consumtion rates are then combined into a dataframe.
+
+5. The name of geogrpahies is added back in for clarity.
+
+6. Built up area per capita is calculated.
+
+7. Countries are pulled from the area codes, so the indicator can be calcualted by country as well as by individual area within those countired. Group by country codes and sum
+
+8. population groeth rate is calcualted by natural log of present popn - log of old popn / years
        
 
 ## Outputs
 
 
 ### Considerations
-
+ - wihotut the third time period, this wouldnt work. if you dont have a third data set a null dataset can be put in that wont calcualte and results =but the first time period will be calcualted as normal. 
+- shouldn't use division with logs (even thought the UN say to). in log space, division and subtraction are the samebut the subrtraction is safer for undefined values.
+-  the code is unreadbale and could be in more functions. 

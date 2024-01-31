@@ -105,27 +105,35 @@ Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURR
 
 ## Methodology
 
-1. popualtion data read in. renames them to all ages and then the year. These means the tyear references are kept when joined to a larger data frame. other unnecessary columns are dropped and the geography is set as the index to allow for concatanations that join byu the index and the geogrpahies are merged. 
+1. Data pertaining to population for time periods 1, 2 and 3 are read in. The columns of interest (containing total population of all ages) in each dataframe are renamed to include the sampling year and the index is set the the geography code. The columns of interest are taken as series' and concatenated to a dataframe. This resultant dataframe contains population counts for geographies for each of the three time periods sampled. 
 
-2. popualtion growth rate is calcualted for each geogrpahy between the first time period, and the dame ofr the second time period. The results are then concatenated into a new data frame of the growth raes.
+2. Population growth rate for each geography is calculated between time periods 1 and 2 and 2 and 3 by ((ln recent pop - ln past pop) / n of years) in a columnwise fashion. The results for each geography are stored as series' and concatenated into a dataframe of population growth rates.
 
-3. Dataframes are come in. if they need to be filtered this can be specified. If you don't need to filter, ir=e you have all manamde areas alreayd selected in the dataframe, there is no need ot filter. for each of the years. The filtered fro=ames are combined into one land, joined on the indexes (geogrpahy). This allows for columnwise calculation of land consumption rate.
+3. Population numbers and population growth rates for each geography are combined into a comprehsive dataframe of population data required for each sampled time period. 
 
-4. The land consumption rates are calcualted columnwise, and concatenated into their own series. these are concatenated. They need to be the same type to be concatenated. The combined land and land consumtion rates are then combined into a dataframe.
+4. Data pertaining to landcover by urban areas for time periods 1, 2 and 3 are read in. If at this stage, if they need to be filtered (eg. if the data contains multiple types of land cover), this can be specified using a boolean flag and completed. Geography is set as the index and the series' are concatenated into a dataframe with containing land cover by urban areas for geogrpahies for each sampled time period. 
 
-5. The name of geogrpahies is added back in for clarity.
+5. Land consumption rate for each geography is calculated between time periods 1 and 2 and 2 and 3 by (((recent consumption rate - past consumption rate)/past)/ n of years) in a columnwise fashion. The results for each geography are stored as series' and concatenated into a dataframe of land consumption rates.
 
-6. Built up area per capita is calculated.
+6. Land cover and land consumption rates for each geography are combined into a comprehsive dataframe of urban-cover required for each sampled time period. 
 
-7. Countries are pulled from the area codes, so the indicator can be calcualted by country as well as by individual area within those countired. Group by country codes and sum
+7. Population growth rate and land consumption rate are concatenated into a dataframe for columnwise calulation of the ratio of land consumption rate to population growth rate by (land consumption rate/ population growth rate) for time periods 1 and 2 and 2 and 3.
 
-8. population groeth rate is calcualted by natural log of present popn - log of old popn / years
-       
+8. A full report is created by concatenating all raw and calculated values for each geography and between sampled time periods. The corresponding name of geographies is reintroduced for clarity in reporting.
+
+9. The additonal metric of built- up area per capita is calculated for each sampled year by (built-up area / population) for each geography. 
+
+10. To enable reporting on a national level, the first character of each geography code is isolated and assigned to a new column from which groupby.sum() can be used. 
+
 
 ## Outputs
+Currently available outputs include:
 
+A full report of population numbers, land cover, population growth rate, land consumption rate, ratio of land consumption to population growth rate and built-up area per captita per small area geography for (and between) each sampled time period. 
+
+A full report of the same metrics as above, for each country. 
 
 ### Considerations
- - wihotut the third time period, this wouldnt work. if you dont have a third data set a null dataset can be put in that wont calcualte and results =but the first time period will be calcualted as normal. 
+ - wihotut the third time period, this wouldnt work. if you dont have a third data set a null dataset can be put in that wont calcualte and results but the first time period will be calcualted as normal. 
 - shouldn't use division with logs (even thought the UN say to). in log space, division and subtraction are the samebut the subrtraction is safer for undefined values.
 -  the code is unreadbale and could be in more functions. 

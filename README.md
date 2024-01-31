@@ -7,21 +7,61 @@ Included in the 17 SDGs is Goal 11, which aims to ["Make cities and human settle
 This code aims to provide an automated calculation of SDG indicator 11.3.1 for the timely reporting on progress towards Goal 11. The most recent reporting of this indicator by the UK covers the years [2013-2016](https://sdgdata.gov.uk/11-3-1/).
 
 ## Set-up 
-?
-1. Clone this repository into the directory you'd like to work from. 
+Usage
+1. Clone this repository into the directory you'd like to work from.
+
+2. In the command-line interface, navigate to the root folder of the project and enter:
+
+    `pip install .`
+
+3. Create a .env file to set the user parameters. To do this, open Notepad and write ROOT_DIR= and the directory you'd like to work from, eg:
+
+    `ROOT_DIR=C:\Users\username\scripts\sdg11_3_1`
     
-2. Create a .env file to set the directory from which inputs will be imported and results will be exported:
+    Save this notepad as a `.env` file (by simply saving as `.env`) in the main directory you'd like to work from.
 
-   Open the Notepad app and write ROOT_DIR= followed by the directory in which the input data is stored (and results we be exported to),  eg: 
-    
-    ROOT_DIR=C:\Users\username\scripts\sdg11_3_1     
+4. The **UserParams class (found in `user_params.py`) is where unique parameters are defined for the SDG indicator calculation.**
+   
+   It will make the assumption that input data will be located in the main directory within a folder named sdg_x_x_x_data, unless you specify a different `data_dir`, eg:
+   
+   if `self.data_dir: Optional[str] = None`:
+   
+   data will be stored in: `C:\Users\username\scripts\SDGs\sdg_x_x_x_data`
 
-Save this notepad as a .env file within the cloned repository.
+   else if `self.data_dir: Optional[str] = "C:\Users\username\somewhere_else"`:
 
-4. Userparams class 
+   data will be stored in: `C:\Users\username\somewhere_else`
 
-## Usage 
-?
+   This is also true for the output directory, where the default directory for output data will be: 'C:\Users\username\scripts\SDGs\sdg_x_x_x_output'
+
+   For this SDG indicator the other user parameters are:
+   
+   For each population dataset (3 in total, t1 refers to "timestep 1"):
+   
+     - `pop_t1_file_path`: the file path for the population data for t1
+       
+     - `pop_t1_kwargs`: any keyword arguments needed for reading the file
+       
+     - `pop_t1_year`: the year the data is from
+       
+     - `pop_t1_age_col`: the column with the population counts (generally will be all ages)
+
+
+   For each land dataset (3 in total, t1 refers to "timestep 1"):
+   
+     - `land_t1_file_path`: the file path for the land coverage data for t1
+       
+     - `land_t1_kwargs`: any keyword arguments needed for reading the file
+       
+     - `land_t1_land_col`: the column with the land area data
+       
+     - `land_t1_filter_land_flag`: flag if the data needs to be filtered at all
+       
+     - `land_t1_filter_land_col`: column to filter the data on
+       
+     - `land_t1_filter_land_value`: keeps the rows with the value in filter_land_col
+
+
 
 ## Input Data
 

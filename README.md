@@ -3,7 +3,7 @@
 
 The Sustainable Development Goals (SDGs) are part of the UN 2030 Agenda for Sustainable Development. The Office for National Statistics (ONS) reports the UK data for the SDG indicators on the [UK Sustainable Development Goals webpage](https://sdgdata.gov.uk/), contributing to progress towards a sustainable global future. 
 
-Included in the 17 SDGs is Goal 11, which aims to ["Make cities and human settlements inclusive, safe, resillient and sustainable"](https://sdgs.un.org/goals/goal11). One indicator that supports this goal is **11.3.1: Ratio of land consumption rate to population growth rate**. 
+Included in the 17 SDGs is Goal 11, which aims to ["Make cities and human settlements inclusive, safe, resilient and sustainable"](https://sdgs.un.org/goals/goal11). One indicator that supports this goal is **11.3.1: Ratio of land consumption rate to population growth rate**. 
 
 This code aims to provide an automated calculation of SDG indicator 11.3.1 for the timely reporting on progress towards Goal 11. The most recent reporting of this indicator by the UK covers the years [2013-2016](https://sdgdata.gov.uk/11-3-1/).
 
@@ -58,9 +58,9 @@ This SDG indicator requires 3 distinct data types to be input:
 
 2. **Cover of land by manmade, urban, or built up structures for given time periods.** The assumed format of this data is .shp. 
 
-3. **The geographical boundaries of the areas for which population estimates used were collected.** This is so that land consumption can be accuratley compared against population growth. The assumed format of this data is .shp.
+3. **The geographical boundaries of the areas for which population estimates used were collected.** This is so that land consumption can be accurately compared against population growth. The assumed format of this data is .shp.
 
-Since this SDG indicator considers **rates**, the time at which the input data has been collected is important. Population estimates and land cover data to be compared should be collected **within the same year**, and preferably the same month. A wider temporal range between samples (5-10 years is recommended) will caputure more change than using consectutive years. Geographical boundaries must be uniform used to should correspond to the **most recent year** for which population has been sampled.  
+Since this SDG indicator considers **rates**, the time at which the input data has been collected is important. Population estimates and land cover data to be compared should be collected **within the same year**, and preferably the same month. A wider temporal range between samples (5-10 years is recommended) will capture more change than using consecutive years. Geographical boundaries must be uniform used to should correspond to the **most recent year** for which population has been sampled.  
 
 Since the United Kingdom is made up of four countries, each with their own methods of collecting and publishing data, total input data will likely amount to more than 3 sources. The SDG indicator should only be calculated for countries where a full input dataset is available.  
 
@@ -68,33 +68,33 @@ Since the United Kingdom is made up of four countries, each with their own metho
 
 ### Methodology
 
-1. Data pertaining to population for time periods 1, 2 and 3 are read. The columns of interest (containing total population of all ages) in each dataframe are renamed to include the sampling year and the index is set the the geography code. The columns of interest are taken as series' and concatenated to a dataframe. This resultant dataframe contains population counts for geographies for each of the three time periods sampled. 
+1. Data pertaining to population for time periods 1, 2 and 3 are read. The columns of interest (containing total population of all ages) in each dataframe are renamed to include the sampling year and the index is set the geography code. The columns of interest are taken as series' and concatenated to a dataframe. This resultant dataframe contains population counts for geographies for each of the three time periods sampled. 
 
-2. Population growth rate for each geography is calculated between time periods 1 and 2 and 2 and 3 by ((ln recent pop - ln past pop) / n of years) in a columnwise fashion. The results for each geography are stored as series' and concatenated into a dataframe of population growth rates.
+2. Population growth rate for each geography is calculated between time periods 1 and 2 and 2 and 3 by ((ln recent pop - ln past pop) / n of years) in a column-wise fashion. The results for each geography are stored as series' and concatenated into a dataframe of population growth rates.
 
-3. Population numbers and population growth rates for each geography are combined into a comprehsive dataframe of population data required for each sampled time period. 
+3. Population numbers and population growth rates for each geography are combined into a comprehensive dataframe of population data required for each sampled time period. 
 
-4. Data pertaining to landcover by urban areas for time periods 1, 2 and 3 are read in. If at this stage, if they need to be filtered (eg. if the data contains multiple types of land cover), this is specified using a boolean flag and completed. Geography code is set as the index and the series' are concatenated into a dataframe with containing land cover by urban areas for geogrpahies for each sampled time period. 
+4. Data pertaining to landcover by urban areas for time periods 1, 2 and 3 are read in. If at this stage, if they need to be filtered (eg. if the data contains multiple types of land cover), this is specified using a Boolean flag and completed. Geography code is set as the index and the series are concatenated into a dataframe with containing land cover by urban areas for geography for each sampled time period. 
 
-5. Land consumption rate for each geography is calculated between time periods 1 and 2 and 2 and 3 by (((recent consumption rate - past consumption rate)/past)/ n of years) in a columnwise fashion. The results for each geography are stored as series' and concatenated into a dataframe of land consumption rates.
+5. Land consumption rate for each geography is calculated between time periods 1 and 2 and 2 and 3 by (((recent consumption rate - past consumption rate)/past)/ n of years) in a column wise fashion. The results for each geography are stored as series' and concatenated into a dataframe of land consumption rates.
 
-6. Land cover and land consumption rates for each geography are combined into a comprehsive dataframe of urban-cover required for each sampled time period. 
+6. Land cover and land consumption rates for each geography are combined into a comprehensive dataframe of urban-cover required for each sampled time period. 
 
-7. Population growth rate and land consumption rate are concatenated into a dataframe for columnwise calulation of the ratio of land consumption rate to population growth rate by (land consumption rate/ population growth rate) for time periods 1 and 2 and 2 and 3.
+7. Population growth rate and land consumption rate are concatenated into a dataframe for column-wise calculation of the ratio of land consumption rate to population growth rate by (land consumption rate/ population growth rate) for time periods 1 and 2 and 2 and 3.
 
 8. A full report is created by concatenating all raw and calculated values for each geography and between sampled time periods. The corresponding name of geography code is reintroduced for clarity in reporting.
 
-9. The additonal metric of built- up area per capita is calculated for each sampled year by (built-up area / population) for each geography. 
+9. The additional metric of built- up area per capita is calculated for each sampled year by (built-up area / population) for each geography. 
 
 10. To enable reporting on a national level, the first character of each geography code is isolated and assigned to a new column from which groupby.sum() is used.
 
-Full programatic calculation and methodology is found within `in sdg_11_3_1_src/sdg_11_3_1.py`. 
+Full programmatic calculation and methodology is found within `in sdg_11_3_1_src/sdg_11_3_1.py`. 
 
 ### Outputs
 
 Currently available outputs include:
 
-- A full report of population numbers, land cover, population growth rate, land consumption rate, ratio of land consumption to population growth rate and built-up area per captita per small area geography for (and between) each sampled time period (.csv). 
+- A full report of population numbers, land cover, population growth rate, land consumption rate, ratio of land consumption to population growth rate and built-up area per capita per small area geography for (and between) each sampled time period (.csv). 
 
 - A full report of the same metrics as above, for each country (.csv). 
 
@@ -107,7 +107,7 @@ Currently available outputs include:
 Great Britain (land consumption): Ordnance Survey Master Map Topography, manmade layer. 
 (https://www.ordnancesurvey.co.uk/products/os-mastermap-topography-layer)
     
-England and Wales (population):Lower-Layer Super Output Area (LSOA) Population estimates, ONS.             (https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/lowersuperoutputareamidyearpopulationestimates)
+England and Wales (population): Lower-Layer Super Output Area (LSOA) Population estimates, ONS.             (https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/lowersuperoutputareamidyearpopulationestimates)
         
 England and Wales (statistical geography boundaries): LSOAs, ONS Open Geography Portal. 
 (https://geoportal.statistics.gov.uk/datasets/3011969ff4e84966b2cbc3b642ae32de_0/explore?location=50.170958%2C-5.597654%2C5.68)
@@ -127,8 +127,19 @@ Northern Ireland (statistical geography boundaries): Small Areas, Northern Irela
 Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURRENTLY AVAILABLE: will need discussion with OSNI as may not be free as under the GB PSGA agreement.  
 
 ### Considerations
- - wihotut the third time period, this wouldnt work. if you dont have a third data set a null dataset can be put in that wont calcualte and results but the first time period will be calcualted as normal. 
-- shouldn't use division with logs (even thought the UN say to). in log space, division and subtraction are the samebut the subrtraction is safer for undefined values.
--  the code is unreadbale and could be in more functions.
--  Assumed data formats - if they're not used and better ones are found, changes to the methods will be required.
--  manmade coverage does acocunt for upwards building. 
+
+- The methodology of this indicator calculation is based upon assumed input data formats (see methodology). If better input data is found in an alternative format, methodology may need to be adjusted accordingly.
+- without data for a third time period, this script won't work. If a third dataset isn't available /desired, a null dataset can be put in its place and the changes across first time period will be calculated as normal. 
+- Although the UN recommendations suggest dividing natural logs, we believe it is safer to subtract the for undefined values.
+-  Manmade land coverage used in this calculation does account for building upwards and thus a degree of accuracy is introduced to the calculation. 
+- Please consult the [UN indicator requirements](https://unstats.un.org/sdgs/metadata/files/Metadata-11-03-01.pdf) for further considerations.
+
+### Further work
+
+- None. It's perfect as is. We're offended you'd even suggest it.
+- The input data and methodology should be comprehensively compared against [UN specified requirements](https://unstats.un.org/sdgs/metadata/files/Metadata-11-03-01.pdf) when considering improvements.
+- Readability of this code could be improved (ie. more functions defined). 
+
+#### Authors
+
+Ed Cuss (EdCussONS) & Lucy Astley-Jones (LucyAstleyJonesONS).

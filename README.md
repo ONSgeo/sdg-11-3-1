@@ -48,20 +48,21 @@ This code aims to provide an automated calculation of SDG indicator 11.3.1 for t
 
 ## Usage
 
+Running `SDG11_3_1_Calculate.ipynb` will calculate SDG indicator 11.3.1.
 
 ### Input Data
 
 This SDG indicator requires 3 distinct data types to be input: 
 
-1. **Population estimates for a given time periods.** These should be to the smallest possible granularity (LSOAs have been used previously). The likely format for this data is .csv.
+1. **Population estimates for a given time periods.** These should be to the smallest possible granularity. The assumed format for this data is .csv.
 
-2. **Cover of land by manmade, urban, or built up structures for given time periods.** The likely format of this data is .shp. 
+2. **Cover of land by manmade, urban, or built up structures for given time periods.** The assumed format of this data is .shp. 
 
-3. **The geographical boundaries of the areas for which population estimates used were collected.** This is so that land consumption can be accuratley compared against population growth. The likely format of this data is .shp.
+3. **The geographical boundaries of the areas for which population estimates used were collected.** This is so that land consumption can be accuratley compared against population growth. The assumed format of this data is .shp.
 
 Since this SDG indicator considers **rates**, the time at which the input data has been collected is important. Population estimates and land cover data to be compared should be collected **within the same year**, and preferably the same month. A wider temporal range between samples (5-10 years is recommended) will caputure more change than using consectutive years. Geographical boundaries must be uniform used to should correspond to the **most recent year** for which population has been sampled.  
 
-Since the United Kingdom is made up of four countries, each with their own methods of collecting and publishing data, total input data will likely amount to more than 3 sources. 
+Since the United Kingdom is made up of four countries, each with their own methods of collecting and publishing data, total input data will likely amount to more than 3 sources. The SDG indicator should only be calculated for countries where a full input dataset is available.  
 
 [Further detail on requirements for SGG 11.3.1 as specified by the UN.](https://unstats.un.org/sdgs/metadata/files/Metadata-11-03-01.pdf) 
 
@@ -129,4 +130,6 @@ Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURR
 ### Considerations
  - wihotut the third time period, this wouldnt work. if you dont have a third data set a null dataset can be put in that wont calcualte and results but the first time period will be calcualted as normal. 
 - shouldn't use division with logs (even thought the UN say to). in log space, division and subtraction are the samebut the subrtraction is safer for undefined values.
--  the code is unreadbale and could be in more functions. 
+-  the code is unreadbale and could be in more functions.
+-  Assumed data formats - if they're not used and better ones are found, changes to the methods will be required.
+-  manmade coverage does acocunt for upwards building. 

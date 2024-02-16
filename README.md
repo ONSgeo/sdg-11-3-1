@@ -66,16 +66,15 @@ Since the United Kingdom is made up of four countries, each with their own metho
 
 [Further detail on requirements for SGG 11.3.1 as specified by the UN.](https://unstats.un.org/sdgs/metadata/files/Metadata-11-03-01.pdf) 
 
-
 ### Methodology
 
-1. Data pertaining to population for time periods 1, 2 and 3 are read in. The columns of interest (containing total population of all ages) in each dataframe are renamed to include the sampling year and the index is set the the geography code. The columns of interest are taken as series' and concatenated to a dataframe. This resultant dataframe contains population counts for geographies for each of the three time periods sampled. 
+1. Data pertaining to population for time periods 1, 2 and 3 are read. The columns of interest (containing total population of all ages) in each dataframe are renamed to include the sampling year and the index is set the the geography code. The columns of interest are taken as series' and concatenated to a dataframe. This resultant dataframe contains population counts for geographies for each of the three time periods sampled. 
 
 2. Population growth rate for each geography is calculated between time periods 1 and 2 and 2 and 3 by ((ln recent pop - ln past pop) / n of years) in a columnwise fashion. The results for each geography are stored as series' and concatenated into a dataframe of population growth rates.
 
 3. Population numbers and population growth rates for each geography are combined into a comprehsive dataframe of population data required for each sampled time period. 
 
-4. Data pertaining to landcover by urban areas for time periods 1, 2 and 3 are read in. If at this stage, if they need to be filtered (eg. if the data contains multiple types of land cover), this can be specified using a boolean flag and completed. Geography is set as the index and the series' are concatenated into a dataframe with containing land cover by urban areas for geogrpahies for each sampled time period. 
+4. Data pertaining to landcover by urban areas for time periods 1, 2 and 3 are read in. If at this stage, if they need to be filtered (eg. if the data contains multiple types of land cover), this is specified using a boolean flag and completed. Geography code is set as the index and the series' are concatenated into a dataframe with containing land cover by urban areas for geogrpahies for each sampled time period. 
 
 5. Land consumption rate for each geography is calculated between time periods 1 and 2 and 2 and 3 by (((recent consumption rate - past consumption rate)/past)/ n of years) in a columnwise fashion. The results for each geography are stored as series' and concatenated into a dataframe of land consumption rates.
 
@@ -83,21 +82,21 @@ Since the United Kingdom is made up of four countries, each with their own metho
 
 7. Population growth rate and land consumption rate are concatenated into a dataframe for columnwise calulation of the ratio of land consumption rate to population growth rate by (land consumption rate/ population growth rate) for time periods 1 and 2 and 2 and 3.
 
-8. A full report is created by concatenating all raw and calculated values for each geography and between sampled time periods. The corresponding name of geographies is reintroduced for clarity in reporting.
+8. A full report is created by concatenating all raw and calculated values for each geography and between sampled time periods. The corresponding name of geography code is reintroduced for clarity in reporting.
 
 9. The additonal metric of built- up area per capita is calculated for each sampled year by (built-up area / population) for each geography. 
 
-10. To enable reporting on a national level, the first character of each geography code is isolated and assigned to a new column from which groupby.sum() can be used. 
+10. To enable reporting on a national level, the first character of each geography code is isolated and assigned to a new column from which groupby.sum() is used.
 
+Full programatic calculation and methodology is found within `in sdg_11_3_1_src/sdg_11_3_1.py`. 
 
 ### Outputs
 
-
 Currently available outputs include:
 
-A full report of population numbers, land cover, population growth rate, land consumption rate, ratio of land consumption to population growth rate and built-up area per captita per small area geography for (and between) each sampled time period. 
+- A full report of population numbers, land cover, population growth rate, land consumption rate, ratio of land consumption to population growth rate and built-up area per captita per small area geography for (and between) each sampled time period (.csv). 
 
-A full report of the same metrics as above, for each country. 
+- A full report of the same metrics as above, for each country (.csv). 
 
 
 ## Notes

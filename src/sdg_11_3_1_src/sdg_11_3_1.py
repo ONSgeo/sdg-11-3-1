@@ -4,7 +4,7 @@ import pandas as pd
 import geopandas as gpd
 import rasterio as rio
 
-from src.sdg_11_3_1_src.sdg_base.src.sdg_base_src.sdg_base import SDGBase
+from src.sdg_11_3_1_src.sdg_base.base_src.sdg_base_src.sdg_base import SDGBase
 from src.sdg_11_3_1_src.utils import InputFile
 from user_params import UserParams
 

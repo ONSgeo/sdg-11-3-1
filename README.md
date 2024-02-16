@@ -129,7 +129,7 @@ Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURR
 ### Considerations
 
 - The methodology of this indicator calculation is based upon assumed input data formats (see methodology). If better input data is found in an alternative format, methodology may need to be adjusted accordingly.
-- without data for a third time period, this script won't work. If a third dataset isn't available /desired, a null dataset can be put in its place and the changes across first time period will be calculated as normal. 
+- Without data for a third time period, this script won't work. If a third dataset isn't available /desired, a null dataset can be put in its place and the changes across first time period will be calculated as normal. 
 - Although the UN recommendations suggest dividing natural logs, we believe it is safer to subtract the for undefined values.
 -  Manmade land coverage used in this calculation does account for building upwards and thus a degree of accuracy is introduced to the calculation. 
 - Please consult the [UN indicator requirements](https://unstats.un.org/sdgs/metadata/files/Metadata-11-03-01.pdf) for further considerations.

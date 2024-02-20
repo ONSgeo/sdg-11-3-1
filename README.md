@@ -138,7 +138,7 @@ Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURR
 
 ### Further work
 
-- None. It's perfect as is. We're offended you'd even suggest it.
+- ~~None. It's perfect as is. We're offended you'd even suggest it.~~
 - The input data and methodology should be comprehensively compared against [UN specified requirements](https://unstats.un.org/sdgs/metadata/files/Metadata-11-03-01.pdf) when considering improvements.
 - Readability of this code could be improved (ie. more functions defined). 
 

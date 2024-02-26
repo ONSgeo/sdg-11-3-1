@@ -140,7 +140,7 @@ Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURR
 
 - ~~None. It's perfect as is. We're offended you'd even suggest it.~~
 - The input data and methodology should be comprehensively compared against [UN specified requirements](https://unstats.un.org/sdgs/metadata/files/Metadata-11-03-01.pdf) when considering improvements.
-- Readability of this code could be improved (ie. more functions defined).
+- Readability and testability of this code could be improved (ie. more functions defined).
 - The methodology of this calculator takes input data saved locally. The ability to directly stream input data, through an API or otherwise, is desirable but dependent on the data source. 
 
 #### Authors

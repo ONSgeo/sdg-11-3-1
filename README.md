@@ -1,7 +1,7 @@
 ## Introduction
 
 
-The Sustainable Development Goals (SDGs) are part of the UN 2030 Agenda for Sustainable Development. The Office for National Statistics (ONS) reports the UK data for the SDG indicators on the [UK Sustainable Development Goals webpage](https://sdgdata.gov.uk/), contributing to progress towards a sustainable global future. 
+The Sustainable Development Goals (SDGs) are part of the UN 2030 Agenda for Sustainable Development. The Office for National Statistics (ONS) reports some of the UK data for the SDG indicators on the [UK Sustainable Development Goals webpage](https://sdgdata.gov.uk/), contributing to progress towards a sustainable global future. 
 
 Included in the 17 SDGs is Goal 11, which aims to ["Make cities and human settlements inclusive, safe, resilient and sustainable"](https://sdgs.un.org/goals/goal11). One indicator that supports this goal is **11.3.1: Ratio of land consumption rate to population growth rate**. 
 
@@ -62,7 +62,7 @@ This SDG indicator requires 3 distinct data types to be input:
 
 3. **The geographical boundaries of the areas for which population estimates used were collected.** This is so that land consumption can be accurately compared against population growth. The assumed format of this data is .shp.
 
-Since this SDG indicator considers **rates**, the time at which the input data has been collected is important. Population estimates and land cover data to be compared should be collected **within the same year**, and preferably the same month. A wider temporal range between samples (5-10 years is recommended) will capture more change than using consecutive years. Geographical boundaries must be uniform used to should correspond to the **most recent year** for which population has been sampled.  
+Since this SDG indicator considers **rates**, the time at which the input data has been collected is important. Population estimates and land cover data to be compared should be collected **within the same year**, and preferably the same month. A wider temporal range between samples (5-10 years is recommended) will capture more change than using consecutive years. Geographical boundaries used must be uniform and should correspond to the **most recent year** for which population has been sampled.  
 
 Since the United Kingdom is made up of four countries, each with their own methods of collecting and publishing data, total input data will likely amount to more than 3 sources. The SDG indicator should only be calculated for countries where a full input dataset is available.  
 
@@ -132,7 +132,7 @@ Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURR
 
 - The methodology of this indicator calculation is based upon assumed input data formats (see methodology). If better input data is found in an alternative format, methodology may need to be adjusted accordingly.
 - Without data for a third time period, this script won't work. If a third dataset isn't available /desired, a null dataset can be put in its place and the changes across first time period will be calculated as normal. 
-- Although the UN recommendations suggest dividing natural logs, we believe it is safer to subtract the for undefined values.
+- Although the UN recommendations suggest dividing natural logs in this calculation, we have subtracted them on the basis that it is safer to subtract logs for undefined values.
 -  Manmade land coverage used in this calculation does account for building upwards and thus a degree of accuracy is introduced to the calculation. 
 - Please consult the [UN indicator requirements](https://unstats.un.org/sdgs/metadata/files/Metadata-11-03-01.pdf) for further considerations.
 

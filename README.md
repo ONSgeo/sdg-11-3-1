@@ -136,11 +136,12 @@ Northern Ireland (land consumption): Ordnance Survey Northern Ireland - NOT CURR
 -  Manmade land coverage used in this calculation does account for building upwards and thus a degree of accuracy is introduced to the calculation. 
 - Please consult the [UN indicator requirements](https://unstats.un.org/sdgs/metadata/files/Metadata-11-03-01.pdf) for further considerations.
 
-### Further work
+### Long-term improvements
+
+**Short-term improvements can be found under "Issues" within this repository.**
 
 - ~~None. It's perfect as is. We're offended you'd even suggest it.~~
 - The input data and methodology should be comprehensively compared against [UN specified requirements](https://unstats.un.org/sdgs/metadata/files/Metadata-11-03-01.pdf) when considering improvements.
-- Readability and testability of this code could be improved (ie. more functions defined).
 - The methodology of this calculator takes input data saved locally. The ability to directly stream input data, through an API or otherwise, is desirable but dependent on the data source. 
 
 #### Authors
